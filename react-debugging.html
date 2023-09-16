@@ -65,24 +65,31 @@
         // No need to change anything ABOVE this line ^
 
         return (
-          <h1>Draw a Card</h1>
-          <button onClick={}>
-            Click to Draw a Card
-          </button>
-          <button onclick={shuffle}>
-            Return Cards and Shuffle Deck
-          </button>
-          <div style={handStyles}>
-            {hand.map((card, index) => {
+          <>
+            <h1>Draw a Card</h1>
+            <button onClick={drawCard}>
+              Click to Draw a Card
+            </button>
+            <button onClick={shuffle}>
+              Return Cards and Shuffle Deck
+            </button>
+            <div style={handStyles}>
+              {hand.map((card, index) => {
               return (
                 <div style={cardStyles} key={index}>
                   {card}
                 </div>
               )
-            })}
-          </div>
+              })}
+            </div>
+          </>
         )
       }
+    
+      // my process: 
+// I noticed there was a syntax error and as soon as i read through it, I knew it was missing fragments somewhere, so I put fragments around the return( section. That fixed the first error.
+// The next error showed there was nothing within the onClick= {} in the first button so I looked through to see which variable was being held in the second button and went up a variable and placed the name inside the curly braces. That fixed the second error.
+// The final error mentioned an event handler error within a button and so I looked through the buttons and saw that on line 73 the onClick was missing the c and so I added a capitalized "C" and that fixed the final error. 
 
       // No need to change anything below this line
 
