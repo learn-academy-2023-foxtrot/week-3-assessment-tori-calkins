@@ -17,16 +17,16 @@
 // a) Create a test with expect statements for each of the variables provided.
 
 // Test:
-// describe("fibonacci", () => {
-//   it("returns an array containing the Fibonacci sequence", () =>{
-//     const fibonacciLength1 = 6 // 6 is the length of the expected array 
-//     // Expected output: [1, 1, 2, 3, 5, 8]
-//     const fibonacciLength2 = 10 // 10 is the length of the expected array
-//     // Expected output: [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-//     expect(fibonacci(fibonacciLength1)).toEqual([1, 1, 2, 3, 5, 8])
-//     expect(fibonacci(fibonacciLength2)).toEqual([1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
-//   })
-// })
+describe("fibonacci", () => {
+  it("returns an array containing the Fibonacci sequence", () =>{
+    const fibonacciLength1 = 6 // 6 is the length of the expected array 
+    // Expected output: [1, 1, 2, 3, 5, 8]
+    const fibonacciLength2 = 10 // 10 is the length of the expected array
+    // Expected output: [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+    expect(fibonacci(fibonacciLength1)).toEqual([1, 1, 2, 3, 5, 8])
+    expect(fibonacci(fibonacciLength2)).toEqual([1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
+  })
+})
 
 //Good Failure: ReferenceError: fibonacci is not defined
 const fibonacciLength1 = 6
@@ -51,13 +51,13 @@ const newArr = [1, 1]
   return newArr
 }
 
-console.log(fibonacci(fibonacciLength2))
+// console.log(fibonacci(fibonacciLength2))
 
 // --------------------2) Create a function that takes in an object and returns an array of the values sorted from least to greatest.
 //Hint: Check out this resource: Object.values() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
 
 // a) Create a test with expect statements for each of the variables provided.
-//Test:
+// //Test:
 describe("weekArr", () => {
   it("returns an array of the values sorted from least to greatest", () => {
     const studyMinutesWeek1 = {
@@ -69,7 +69,7 @@ describe("weekArr", () => {
       friday: 15,
       saturday: 60
     }
-//     // Expected output: [15, 15, 20, 30, 30, 60, 90]
+// //     // Expected output: [15, 15, 20, 30, 30, 60, 90]
     const studyMinutesWeek2 = {
       sunday: 100,
       monday: 10,
@@ -79,7 +79,7 @@ describe("weekArr", () => {
       friday: 15,
       saturday: 65
     }
-    // Expected output: [10, 15, 20, 45, 60, 65, 100]
+   // Expected output: [10, 15, 20, 45, 60, 65, 100]
     expect(weekArr(studyMinutesWeek1)).toEqual([15, 15, 20, 30, 30, 60, 90])
     expect(weekArr(studyMinutesWeek2)).toEqual([10, 15, 20, 45, 60, 65, 100])
   })
@@ -93,30 +93,54 @@ describe("weekArr", () => {
 // input: an object, studyMinutesWeek1, studyMinutesWeek2
 // output: an array of the object values in the key:value pairs in order of least to greatest
 // process: create a function, Object.values() to move the values of the key: value pairs of the object into an array, .sort() .toFixed() method 
-const weekArr = (array) => {
-  const values = Object.values(array)
-    values.sort((a, b) => a - b)
-  return values
-  // Object.values(weekArr).sort((a, b) => a - b)
+const weekArr = (obj) => {
+  const var1 = Object.values(obj)
+  const var2 = var1.sort((a, b) => a - b)
+  return var2
 }
-  const valuesSorted = weekArr(studyMinutesWeek1)
-console.log(valuesSorted)
+//console.log(weekArr(studyMinutesWeek2))
 
-// I got it to console.log the expected output but wont pass the jest test. 
+//  this one took forever for me to get it to pass the jest test, but it worked. my object.values wasn't capitalized so it kept saying it wasnt defined.
 
 // --------------------3) Create a function that takes in an array and returns an array of the accumulating sum. An empty array should return an empty array.
 
 // a) Create a test with expect statements for each of the variables provided.
-describe()
-const accountTransactions1 = [100, -17, -23, -9]
-// Expected output: [100, 83, 60, 51]
+// Test:
+describe("accumSum", () => {
+  it("returns an array of the accumulating sum", () => {
+    const accountTransactions1 = [100, -17, -23, -9]
+    // Expected output: [100, 83, 60, 51]
+    const accountTransactions2 = [250, -89, 100, -96]
+    // Expected output: [250, 161, 261, 165]
+    const accountTransactions3 = []
+    // Expected output: []
+    expect(accumSum(accountTransactions1)).toEqual([100, 83, 60, 51])
+    expect(accumSum(accountTransactions2)).toEqual([250, 161, 261, 165])
+    expect(accumSum(accountTransactions3)).toEqual([])
+  })
+})
 
-const accountTransactions2 = [250, -89, 100, -96]
-// Expected output: [250, 161, 261, 165]
-
-const accountTransactions3 = []
-// Expected output: []
-
+// Good Failure:  ReferenceError: accumSum is not defined
 // b) Create the function that makes the test pass.
 
 // Pseudo code:
+// function name: "accumSum"
+// input: an array of numbers 
+// output: an array of the previous numbers of the array added together from the index prior.
+// process: .map() will be used to iterate through the first array and create a second array thats the same length but with different values, addition will be used to add the value of the index prior to the next index value, 
+
+//  attempt 1 // output: [ NaN, NaN, NaN, NaN ]?
+// const accumSum = (array) => {
+//   return array.map((index) => {
+//     return index[0] + index[1]
+//   })
+// }
+// console.log(accumSum(accountTransactions1))
+//attempt 2: 
+const accumSum = (array) => {
+  let sum = 0 // created a new variable to give the value something to add to, to start the process
+  return array.map((value) => (sum += value)) // used .map() to create a new array with the values that met this condition of adding the previous sum value to the next.
+}
+//console.log(accumSum(accountTransactions2))
+// // IT WORKED logging wise !!!!!
+//  IT PASSEDDDD!!!
